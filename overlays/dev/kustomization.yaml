@@ -6,5 +6,5 @@ resources:
 patchesStrategicMerge:
   - replica-patch.yaml
 images:
-  - name: dogukanngumus/k8s-hero-app
+  - name: nodsid/k8s-hero-app
     newTag: a3c76b8
