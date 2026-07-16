@@ -15,7 +15,7 @@ spec:
         - name: dockerhub-secret       
       containers:
       - name: hero-app
-        image: dogukanngumus/k8s-hero-app # Tag yok, overlays'den gelecek
+        image: nodsid/k8s-hero-app # Tag yok, overlays'den gelecek
         ports:
         - containerPort: 8080
         env:
