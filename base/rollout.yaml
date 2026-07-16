@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: hero-app-rollout
+spec:
+  selector:
+    matchLabels:
+      app: hero-app
+  template:
+    metadata:
+      labels:
+        app: hero-app
+    spec:
+      containers:
+      - name: hero-app
+        image: dogukanngumus/k8s-hero-app # Tag yok, overlays'den gelecek
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: hero-app-config
+              key: APP_MESSAGE
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: hero-app-secret
+              key: API_KEY
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+  strategy:
+    canary:
+      steps:
+      - setWeight: 20
+      - pause: {} # Manuel onay (promote) bekler
+      - setWeight: 100
