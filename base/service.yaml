@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: hero-app-service
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: hero-app
   ports:
