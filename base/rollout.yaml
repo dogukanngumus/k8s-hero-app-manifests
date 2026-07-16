@@ -11,6 +11,8 @@ spec:
       labels:
         app: hero-app
     spec:
+      imagePullSecrets:              
+        - name: dockerhub-secret       
       containers:
       - name: hero-app
         image: dogukanngumus/k8s-hero-app # Tag yok, overlays'den gelecek
